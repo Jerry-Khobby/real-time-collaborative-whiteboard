@@ -32,9 +32,28 @@ export class AppGateway implements OnGatewayConnection,
         this.server.emit('room', client.id + ' left!')
     }
 
-    @SubscribeMessage('canvas')
-    handleMessage(client: Socket, canvas: any): void {
-      console.log(`Recieved a canvas change from ${client.id}:${canvas}`)
+    @SubscribeMessage('join-canvas')
+    handleJoinCanvas(client: Socket, canvas: any): void {
+      console.log(`A player just the game ${client.id}:${canvas}`)
         this.server.emit('room', `[${client.id}] -> ${canvas}`);
     }
+
+        @SubscribeMessage('draw')
+    handleDrawCanvas(client: Socket, canvas: any): void {
+      console.log(`A player just the game ${client.id}:${canvas}`)
+        this.server.emit('room', `[${client.id}] -> ${canvas}`);
+    }
+
+        @SubscribeMessage('clear')
+    handleClearDrawCanvas(client: Socket, canvas: any): void {
+      console.log(`A player just the game ${client.id}:${canvas}`)
+        this.server.emit('room', `[${client.id}] -> ${canvas}`);
+    }
+
+        @SubscribeMessage('leave-canvas')
+    handleLeaveCanvas(client: Socket, canvas: any): void {
+      console.log(`A player just the game ${client.id}:${canvas}`)
+        this.server.emit('room', `[${client.id}] -> ${canvas}`);
+    }
+    
 }

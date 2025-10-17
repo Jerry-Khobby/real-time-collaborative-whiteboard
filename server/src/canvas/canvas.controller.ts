@@ -1,4 +1,4 @@
-import { Body,Controller,Post } from "@nestjs/common";
+import { Body,Controller,Get,Post,Param } from "@nestjs/common";
 import { CanvasService } from "./canvas.service";
 import { CanvasDto } from "./dto/canvas.dto";
 
@@ -11,5 +11,11 @@ export class CanvasController {
   async createCanvas(@Body() body: CanvasDto) {
     const { name, drawingData } = body;
     return this.canvasService.createCanvas(name, drawingData);
+  }
+
+
+  @Get(':canvasId')
+  async getCanvas(@Param('canvasId')canvasId:string){
+    return this.canvasService.getCanvasById(canvasId);
   }
 }

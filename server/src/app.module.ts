@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CanvasModule } from './canvas/canvas.module';
+import { AppGateway } from './canvas.gateway';
 @Module({
   imports: [
     ConfigModule.forRoot({isGlobal:true}),
@@ -11,6 +12,6 @@ import { CanvasModule } from './canvas/canvas.module';
     CanvasModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,AppGateway],
 })
 export class AppModule {}

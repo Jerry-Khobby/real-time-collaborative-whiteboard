@@ -7,7 +7,7 @@ import { CanvasDto } from "./dto/canvas.dto";
 export class CanvasController {
   constructor(private readonly canvasService: CanvasService) {}
 
-  @Post('create')
+  @Post()
   async createCanvas(@Body() body: CanvasDto) {
     const { name, drawingData } = body;
     return this.canvasService.createCanvas(name, drawingData);
@@ -17,5 +17,10 @@ export class CanvasController {
   @Get(':canvasId')
   async getCanvas(@Param('canvasId')canvasId:string){
     return this.canvasService.getCanvasById(canvasId);
+  }
+
+  @Get()
+  async getAllCanvas(){
+    return this.canvasService.listAllCanvas();
   }
 }

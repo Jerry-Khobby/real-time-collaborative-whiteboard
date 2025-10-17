@@ -75,11 +75,23 @@ async getCanvasById(canvasId:string):Promise<{success:boolean;canvas:any}>{
       },
   }
 
-  //I want to return the canvas 
-
-// 
-
+  //I want to list all the canvas items , 
 }
+
+async listAllCanvas(): Promise<{ success: boolean; canvas: any[] }> {
+  const canvasData = await this.canvasModel.find().lean();
+
+  if (!canvasData || canvasData.length === 0) {
+    throw new NotFoundException('No canvas data found!');
+  }
+
+  return {
+    success: true,
+    canvas: canvasData,
+  };
+}
+
+
 
 
 

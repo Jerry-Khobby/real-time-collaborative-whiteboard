@@ -12,6 +12,6 @@ import { AppGateway } from './canvas.gateway';
     CanvasModule,
   ],
   controllers: [AppController],
-  providers: [AppService,AppGateway],
+  providers: [AppService],
 })
 export class AppModule {}

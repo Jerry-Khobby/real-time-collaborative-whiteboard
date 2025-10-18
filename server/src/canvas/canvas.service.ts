@@ -92,6 +92,13 @@ async listAllCanvas(): Promise<{ success: boolean; canvas: any[] }> {
 }
 
 
+// check if a canvas exists by id 
+async canvasExists(canvasId:string):Promise<boolean>{
+  const canvas = await this.canvasModel.findOne({canvasId}).lean();
+  return !!canvas;  
+}
+
+
 
 
 

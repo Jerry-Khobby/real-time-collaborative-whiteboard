@@ -66,7 +66,7 @@ async getCanvasById(canvasId:string):Promise<{success:boolean;canvas:any}>{
 
   return {
     success:true,
-          canvas: {
+        canvas: {
         canvasId: canvas.canvasId,
         name: canvas.name,
         drawingData: canvas.drawingData || [],

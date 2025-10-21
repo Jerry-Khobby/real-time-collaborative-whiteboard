@@ -1,127 +1,151 @@
-"use client"
+"use client";
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
-import { io, type Socket } from "socket.io-client"
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
+import { io, type Socket } from "socket.io-client";
 
 interface DrawEvent {
-  x: number
-  y: number
-  prevX: number
-  prevY: number
-  color: string
-  brushSize: number
+  points: { x: number; y: number }[];
+  color: string;
+  brushSize: number;
+  strokeId?: string;
+  userId?: string;
 }
 
 interface PresenceUser {
-  id: string
-  color: string
+  id: string;
+  color: string;
 }
 
 interface SocketContextType {
-  socket: Socket | null
-  isConnected: boolean
-  users: PresenceUser[]
-  emitDraw: (data: DrawEvent) => void
-  emitClear: () => void
-  onDraw: (callback: (data: DrawEvent) => void) => () => void
-  onClear: (callback: () => void) => () => void
-  onCanvasState: (callback: (state: DrawEvent[]) => void) => () => void
+  socket: Socket | null;
+  isConnected: boolean;
+  users: PresenceUser[];
+  emitDraw: (data: DrawEvent) => void;
+  emitClear: () => void;
+  leaveCanvas: () => void;
+  onDraw: (callback: (data: DrawEvent) => void) => () => void;
+  onClear: (callback: () => void) => () => void;
+  onUserJoin: (callback: (data: any) => void) => () => void;
+  onUserLeave: (callback: (data: any) => void) => () => void;
 }
 
-const SocketContext = createContext<SocketContextType | null>(null)
+const SocketContext = createContext<SocketContextType | null>(null);
 
 export function useSocket() {
-  const context = useContext(SocketContext)
+  const context = useContext(SocketContext);
   if (!context) {
-    throw new Error("useSocket must be used within SocketProvider")
+    throw new Error("useSocket must be used within SocketProvider");
   }
-  return context
+  return context;
 }
 
 interface SocketProviderProps {
-  children: ReactNode
-  canvasId: string
+  children: ReactNode;
+  canvasId: string;
 }
 
 export function SocketProvider({ children, canvasId }: SocketProviderProps) {
-  const [socket, setSocket] = useState<Socket | null>(null)
-  const [isConnected, setIsConnected] = useState(false)
-  const [users, setUsers] = useState<PresenceUser[]>([])
+  const [socket, setSocket] = useState<Socket | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
+  const [users, setUsers] = useState<PresenceUser[]>([]);
 
   useEffect(() => {
-    const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:3001"
+    const socketUrl = "http://localhost:5000";
     const socketInstance = io(socketUrl, {
       transports: ["websocket"],
-    })
+    });
 
     socketInstance.on("connect", () => {
-      console.log("[v0] Socket connected")
-      setIsConnected(true)
-      socketInstance.emit("join-canvas", { canvasId })
-    })
+      console.log("[socket] Connected:", socketInstance.id);
+      setIsConnected(true);
+      socketInstance.emit("join-canvas", { canvasId });
+    });
 
     socketInstance.on("disconnect", () => {
-      console.log("[v0] Socket disconnected")
-      setIsConnected(false)
-    })
+      console.log("[socket] Disconnected");
+      setIsConnected(false);
+    });
 
-    socketInstance.on("presence-update", (data: { users: PresenceUser[] }) => {
-      console.log("[v0] Presence update:", data.users)
-      setUsers(data.users)
-    })
+    socketInstance.on("joined-canvas", (data) => {
+      console.log("[socket] Joined canvas:", data);
+    });
 
-    setSocket(socketInstance)
+    socketInstance.on("user-joined", (data) => {
+      console.log("[socket] User joined:", data);
+    });
+
+    socketInstance.on("user-left", (data) => {
+      console.log("[socket] User left:", data);
+    });
+
+    socketInstance.on("error", (err) => {
+      console.error("[socket] Error:", err);
+    });
+
+    setSocket(socketInstance);
 
     return () => {
-      socketInstance.disconnect()
-    }
-  }, [canvasId])
+      socketInstance.disconnect();
+    };
+  }, [canvasId]);
 
+  // === Emit events ===
   const emitDraw = (data: DrawEvent) => {
     if (socket && isConnected) {
-      socket.emit("draw", { canvasId, ...data })
+      socket.emit("draw", { canvasId, ...data });
     }
-  }
+  };
 
   const emitClear = () => {
-    console.log("[v0] Emitting clear-canvas event")
     if (socket && isConnected) {
-      socket.emit("clear-canvas", { canvasId })
-    } else {
-      console.log("[v0] Cannot emit clear - socket not connected")
+      socket.emit("clear", { canvasId });
     }
-  }
+  };
 
+  const leaveCanvas = () => {
+    if (socket && isConnected) {
+      socket.emit("leave-canvas", { canvasId });
+    }
+  };
+
+  // === Listen for events ===
   const onDraw = (callback: (data: DrawEvent) => void) => {
     if (socket) {
-      socket.on("draw", callback)
-      return () => {
-        socket.off("draw", callback)
-      }
+      socket.on("drawing-data", callback);
+      return () => socket.off("drawing-data", callback);
     }
-    return () => {}
-  }
+    return () => {};
+  };
 
   const onClear = (callback: () => void) => {
     if (socket) {
-      console.log("[v0] Setting up clear-canvas listener")
-      socket.on("clear-canvas", callback)
-      return () => {
-        socket.off("clear-canvas", callback)
-      }
+      socket.on("canvas-cleared", callback);
+      return () => socket.off("canvas-cleared", callback);
     }
-    return () => {}
-  }
+    return () => {};
+  };
 
-  const onCanvasState = (callback: (state: DrawEvent[]) => void) => {
+  const onUserJoin = (callback: (data: any) => void) => {
     if (socket) {
-      socket.on("canvas-state", callback)
-      return () => {
-        socket.off("canvas-state", callback)
-      }
+      socket.on("user-joined", callback);
+      return () => socket.off("user-joined", callback);
     }
-    return () => {}
-  }
+    return () => {};
+  };
+
+  const onUserLeave = (callback: (data: any) => void) => {
+    if (socket) {
+      socket.on("user-left", callback);
+      return () => socket.off("user-left", callback);
+    }
+    return () => {};
+  };
 
   return (
     <SocketContext.Provider
@@ -131,12 +155,14 @@ export function SocketProvider({ children, canvasId }: SocketProviderProps) {
         users,
         emitDraw,
         emitClear,
+        leaveCanvas,
         onDraw,
         onClear,
-        onCanvasState,
+        onUserJoin,
+        onUserLeave,
       }}
     >
       {children}
     </SocketContext.Provider>
-  )
+  );
 }

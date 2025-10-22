@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { io, type Socket } from "socket.io-client";
+import toast from "react-hot-toast";
 
 interface DrawEvent {
   points: { x: number; y: number }[];
@@ -61,6 +62,7 @@ export function SocketProvider({ children, canvasId }: SocketProviderProps) {
       transports: ["websocket"],
     });
 
+    // ✅ Connection
     socketInstance.on("connect", () => {
       console.log("[socket] Connected:", socketInstance.id);
       setIsConnected(true);
@@ -72,20 +74,36 @@ export function SocketProvider({ children, canvasId }: SocketProviderProps) {
       setIsConnected(false);
     });
 
+    // ✅ Joined successfully (self)
     socketInstance.on("joined-canvas", (data) => {
+      toast.success(`You joined canvas: ${data.canvasId}`);
       console.log("[socket] Joined canvas:", data);
     });
 
+    // ✅ Another user joined
     socketInstance.on("user-joined", (data) => {
+      toast.success(`👤 User joined: ${data.userId}`);
       console.log("[socket] User joined:", data);
     });
 
+    // ✅ User left
     socketInstance.on("user-left", (data) => {
+      toast(`👋 User left: ${data.userId}`, { icon: "🚪" });
       console.log("[socket] User left:", data);
     });
 
+    // ✅ Someone cleared canvas
+    socketInstance.on("canvas-cleared", (data) => {
+      toast("🧹 Canvas cleared!", { icon: "🧽" });
+      console.log("[socket] Canvas cleared:", data);
+    });
+
+    // ✅ Drawing data (from others)
+    socketInstance.on("drawing-data", (data) => {});
+
     socketInstance.on("error", (err) => {
       console.error("[socket] Error:", err);
+      toast.error(err.message || "Socket error occurred");
     });
 
     setSocket(socketInstance);
@@ -114,7 +132,7 @@ export function SocketProvider({ children, canvasId }: SocketProviderProps) {
     }
   };
 
-  // === Listen for events ===
+  // === Event listener helpers ===
   const onDraw = (callback: (data: DrawEvent) => void) => {
     if (socket) {
       socket.on("drawing-data", callback);

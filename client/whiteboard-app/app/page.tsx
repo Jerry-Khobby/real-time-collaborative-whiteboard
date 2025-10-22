@@ -73,12 +73,20 @@ export default function HomePage() {
         return;
       }
 
-      setCanvasId(data.canvas.canvasId || "");
-      setCanvasName(data.canvas.name || "");
+      const joinedCanvasId = data.canvas.canvasId;
+      const joinedCanvasName = data.canvas.name;
 
+      // ✅ Update state (optional, for UI)
+      setCanvasId(joinedCanvasId);
+      setCanvasName(joinedCanvasName);
+
+      // ✅ Use the actual values from backend, not the old state
       router.push(
-        `/canvas/${canvasId}?name=${encodeURIComponent(canvasName.trim())}`
+        `/canvas/${joinedCanvasId}?name=${encodeURIComponent(joinedCanvasName)}`
       );
+
+      console.log("Joining canvas:", joinedCanvasId);
+      console.log("canvas name:", joinedCanvasName);
     } catch (err) {
       console.error(err);
       setError("Error connecting to backend");

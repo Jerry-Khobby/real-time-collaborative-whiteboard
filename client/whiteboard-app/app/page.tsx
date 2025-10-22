@@ -17,38 +17,73 @@ export default function HomePage() {
   const [canvasName, setCanvasName] = useState("");
   const [canvasId, setCanvasId] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(""); // <-- track errors
 
+  // Create new canvas
   const createNewCanvas = async () => {
+    setError(""); // clear any previous errors
     if (!canvasName.trim()) return;
-    setLoading(true);
 
+    setLoading(true);
     try {
       const res = await fetch("http://localhost:5000/api/canvas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: canvasName.trim(), drawingData: [] }),
       });
+
       const data = await res.json();
-      if (res.ok && data.data?.canvasId) {
+
+      if (!res.ok) {
+        // show backend message
+        setError(data.message || "Failed to create canvas. Please try again.");
+        return;
+      }
+      setCanvasName(data.data.name || "");
+
+      if (data.data?.canvasId) {
         router.push(
           `/canvas/${data.data.canvasId}?name=${encodeURIComponent(
             canvasName.trim()
           )}`
         );
-      } else {
-        alert("Failed to create canvas. Please try again.");
       }
     } catch (err) {
       console.error(err);
-      alert("Error connecting to backend");
+      setError("Unable to connect to server. Please try again later.");
     } finally {
       setLoading(false);
     }
   };
 
-  const joinCanvas = () => {
-    if (canvasId.trim()) {
-      router.push(`/canvas/${canvasId}`);
+  // Join canvas
+  const joinCanvas = async () => {
+    setError("");
+    if (!canvasId.trim()) return;
+
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/canvas/${canvasId.trim()}`
+      );
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Canvas not found.");
+        return;
+      }
+
+      setCanvasId(data.canvas.canvasId || "");
+      setCanvasName(data.canvas.name || "");
+
+      router.push(
+        `/canvas/${canvasId}?name=${encodeURIComponent(canvasName.trim())}`
+      );
+    } catch (err) {
+      console.error(err);
+      setError("Error connecting to backend");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -56,21 +91,27 @@ export default function HomePage() {
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-4xl">
         <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-balance">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">
             Collaborative Whiteboard
           </h1>
-          <p className="text-lg text-muted-foreground text-balance">
-            Create and share ideas in real-time with your team. Draw together,
-            anywhere.
+          <p className="text-lg text-muted-foreground">
+            Create and share ideas in real-time with your team.
           </p>
         </div>
 
+        {/* 🧱 Error message display */}
+        {error && (
+          <div className="mb-6 text-center text-red-500 font-medium bg-red-100 border border-red-300 rounded-lg p-2">
+            {error}
+          </div>
+        )}
+
         <div className="grid md:grid-cols-2 gap-6">
-          <Card className="border-border bg-card">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-2xl">Create New Canvas</CardTitle>
+              <CardTitle>Create New Canvas</CardTitle>
               <CardDescription>
-                Start a fresh whiteboard and invite others to collaborate
+                Start a fresh whiteboard session.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -79,24 +120,22 @@ export default function HomePage() {
                 value={canvasName}
                 onChange={(e) => setCanvasName(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && createNewCanvas()}
-                className="bg-secondary border-border text-foreground"
               />
               <Button
                 onClick={createNewCanvas}
-                disabled={!canvasName.trim()}
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                size="lg"
+                disabled={!canvasName.trim() || loading}
+                className="w-full"
               >
                 {loading ? "Creating..." : "Create Canvas"}
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="border-border bg-card">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-2xl">Join Existing Canvas</CardTitle>
+              <CardTitle>Join Existing Canvas</CardTitle>
               <CardDescription>
-                Enter a canvas ID to join an ongoing session
+                Enter a canvas ID to join an ongoing session.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -105,16 +144,14 @@ export default function HomePage() {
                 value={canvasId}
                 onChange={(e) => setCanvasId(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && joinCanvas()}
-                className="bg-secondary border-border text-foreground"
               />
               <Button
                 onClick={joinCanvas}
-                disabled={!canvasId.trim()}
+                disabled={!canvasId.trim() || loading}
                 className="w-full"
                 variant="secondary"
-                size="lg"
               >
-                Join Canvas
+                {loading ? "Joining..." : "Join Canvas"}
               </Button>
             </CardContent>
           </Card>

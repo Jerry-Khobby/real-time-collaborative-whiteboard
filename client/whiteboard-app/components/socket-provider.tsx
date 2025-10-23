@@ -77,18 +77,21 @@ export function SocketProvider({ children, canvasId }: SocketProviderProps) {
     // ✅ Joined successfully (self)
     socketInstance.on("joined-canvas", (data) => {
       toast.success(`You joined canvas: ${data.canvasId}`);
+      setUsers(data.users || []);
       console.log("[socket] Joined canvas:", data);
     });
 
     // ✅ Another user joined
     socketInstance.on("user-joined", (data) => {
       toast.success(`👤 User joined: ${data.userId}`);
+      setUsers(data.users || []);
       console.log("[socket] User joined:", data);
     });
 
     // ✅ User left
     socketInstance.on("user-left", (data) => {
       toast(`👋 User left: ${data.userId}`, { icon: "🚪" });
+      setUsers(data.users || []);
       console.log("[socket] User left:", data);
     });
 

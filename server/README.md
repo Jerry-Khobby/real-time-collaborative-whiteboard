@@ -1,98 +1,333 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Collaborative Whiteboard - Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A real-time collaborative drawing application backend built with NestJS, WebSockets (Socket.IO), and MongoDB.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Features
 
-## Description
+- ✨ Real-time drawing synchronization using WebSockets
+- 🎨 Multi-user canvas collaboration
+- 💾 Persistent canvas storage with MongoDB
+- 🔒 Unique canvas ID generation
+- 👥 User presence tracking
+- 🧹 Canvas clearing functionality
+- 📡 Room-based broadcasting
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🛠️ Tech Stack
 
-## Project setup
+- **Framework**: NestJS
+- **WebSocket Library**: Socket.IO
+- **Database**: MongoDB with Mongoose ODM
+- **Language**: TypeScript
+- **Logging**: NestJS Logger
 
+## 📋 Prerequisites
+
+Before running this project, make sure you have:
+
+- Node.js (v18 or higher)
+- MongoDB (running locally or MongoDB Atlas account)
+- npm or yarn package manager
+
+## 🔧 Installation
+
+1. **Clone the repository**
 ```bash
-$ npm install
+   git clone <repository-url>
+   cd whiteboard-backend
 ```
 
-## Compile and run the project
-
+2. **Install dependencies**
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+   npm install
 ```
 
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+3. **Configure environment variables**
+   
+   Create a `.env` file in the root directory:
+```env
+   MONGODB_URI=mongodb://localhost:27017/whiteboard
+   # OR for MongoDB Atlas:
+   # MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/whiteboard
+   
+   PORT=3000
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+4. **Start MongoDB** (if running locally)
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+   mongod
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 🏃 Running the Application
 
-## Resources
+### Development Mode
+```bash
+npm run start:dev
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### Production Mode
+```bash
+npm run build
+npm run start:prod
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+The server will start on `http://localhost:3000`
 
-## Support
+## 📡 API Endpoints
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### REST API
 
-## Stay in touch
+#### Create Canvas
+```http
+POST /canvas
+Content-Type: application/json
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+{
+  "name": "My Canvas",
+  "drawingData": []
+}
 
-## License
+Response:
+{
+  "data": {
+    "canvasId": "a1b2c3d4",
+    "name": "My Canvas",
+    "drawingData": [],
+    "createdAt": "2025-01-15T10:30:00.000Z",
+    "updatedAt": "2025-01-15T10:30:00.000Z"
+  }
+}
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+#### Get Canvas by ID
+```http
+GET /canvas/:canvasId
+
+Response:
+{
+  "success": true,
+  "canvas": {
+    "canvasId": "a1b2c3d4",
+    "name": "My Canvas",
+    "drawingData": [...],
+    "createdAt": "2025-01-15T10:30:00.000Z",
+    "updatedAt": "2025-01-15T10:30:00.000Z"
+  }
+}
+```
+
+#### Get All Canvases
+```http
+GET /canvas
+
+Response:
+{
+  "success": true,
+  "canvas": [
+    {
+      "canvasId": "a1b2c3d4",
+      "name": "Canvas 1",
+      "drawingData": [...],
+      ...
+    },
+    ...
+  ]
+}
+```
+
+### WebSocket Events
+
+#### Client → Server Events
+
+**Join Canvas**
+```javascript
+socket.emit('join-canvas', { canvasId: 'a1b2c3d4' });
+```
+
+**Draw**
+```javascript
+socket.emit('draw', {
+  points: [{ x: 100, y: 150 }, { x: 105, y: 155 }],
+  color: '#000000',
+  brushSize: 2,
+  strokeId: 'unique-stroke-id'
+});
+```
+
+**Clear Canvas**
+```javascript
+socket.emit('clear');
+```
+
+**Leave Canvas**
+```javascript
+socket.emit('leave-canvas');
+```
+
+#### Server → Client Events
+
+**Joined Canvas**
+```javascript
+socket.on('joined-canvas', (data) => {
+  // data: { success, canvasId, users, message }
+});
+```
+
+**Drawing Data (from other users)**
+```javascript
+socket.on('drawing-data', (data) => {
+  // data: { points, color, brushSize, strokeId, userId }
+});
+```
+
+**Canvas Cleared**
+```javascript
+socket.on('canvas-cleared', (data) => {
+  // data: { clearedBy, timestamp }
+});
+```
+
+**User Joined**
+```javascript
+socket.on('user-joined', (data) => {
+  // data: { userId, canvasId, users, message }
+});
+```
+
+**User Left**
+```javascript
+socket.on('user-left', (data) => {
+  // data: { userId, canvasId, users, message }
+});
+```
+
+**Error**
+```javascript
+socket.on('error', (message) => {
+  // Error message string
+});
+```
+
+## 🗂️ Project Structure
+```
+whiteboard-backend/
+├── src/
+│   ├── canvas/
+│   │   ├── canvas.controller.ts    # REST API endpoints
+│   │   ├── canvas.service.ts       # Business logic
+│   │   ├── canvas.module.ts        # Canvas module
+│   │   └── dto/
+│   │       └── canvas.dto.ts       # Data transfer objects
+│   ├── schemas/
+│   │   └── canvas.schema.ts        # MongoDB schema
+│   ├── app.gateway.ts              # WebSocket gateway
+│   ├── app.module.ts               # Root module
+│   └── main.ts                     # Application entry point
+├── .env                            # Environment variables
+├── package.json
+└── tsconfig.json
+```
+
+## 💾 Database Schema
+
+### Canvas Document
+```typescript
+{
+  canvasId: string;        // Unique 8-character hex ID
+  name: string;            // Canvas name
+  drawingData: [           // Array of strokes
+    {
+      points: [{ x: number, y: number }],
+      color: string,
+      brushSize: number
+    }
+  ];
+  createdAt: Date;
+  updatedAt: Date;
+}
+```
+
+## 🔒 Security Features
+
+- CORS enabled for all origins (configure for production)
+- Unique canvas ID generation using crypto module
+- Input validation with DTOs
+- Error handling and logging
+- Connection state management
+
+## 🧪 Testing
+```bash
+# Unit tests
+npm run test
+
+# E2E tests
+npm run test:e2e
+
+# Test coverage
+npm run test:cov
+```
+
+## 📝 Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `MONGODB_URI` | MongoDB connection string | `mongodb://localhost:27017/whiteboard` |
+| `PORT` | Server port | `3000` |
+
+## 🐛 Troubleshooting
+
+### MongoDB Connection Issues
+```bash
+# Check if MongoDB is running
+mongod --version
+
+# Start MongoDB
+mongod
+```
+
+### Port Already in Use
+```bash
+# Kill process on port 3000
+lsof -ti:3000 | xargs kill -9
+```
+
+### WebSocket Connection Failed
+- Ensure CORS is properly configured in `app.gateway.ts`
+- Check frontend is connecting to correct backend URL
+- Verify firewall settings
+
+## 🚀 Deployment
+
+### Using PM2
+```bash
+npm install -g pm2
+npm run build
+pm2 start dist/main.js --name whiteboard-backend
+```
+
+### Using Docker
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "run", "start:prod"]
+```
+
+## 📄 License
+
+MIT
+
+## 👨‍💻 Author
+
+Your Name
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+## 📧 Support
+
+For support, email jeremiah.anku.coblah@gmail.com or open an issue.

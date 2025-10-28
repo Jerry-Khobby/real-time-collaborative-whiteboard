@@ -358,17 +358,17 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-- **Portfolio**: [yourwebsite.com](https://yourwebsite.com)
+- **Portfolio**: [yourwebsite.com](https://jeremiah-anku-koblah.vercel.app/)
 - **Email**: jeremiah.anku.coblah@gmail.com
-- **GitHub**: [@yourusername](https://github.com/yourusername)
-- **LinkedIn**: [Your Name](https://linkedin.com/in/yourprofile)
-- **Twitter**: [@yourhandle](https://twitter.com/yourhandle)
+- **GitHub**: [@yourusername](https://github.com/Jerry-Khobby)
+- **LinkedIn**: [Jeremiah Anku Coblah](https://www.linkedin.com/in/jeremiah-coblah-anku-2b3732229/)
+- **Twitter**: [@yourhandle](https://x.com/jerry92023784)
 
 ## 🌟 Star History
 
 If you find this project useful, please consider giving it a star! ⭐
 
-[![Star History Chart](https://api.star-history.com/svg?repos=yourusername/collaborative-whiteboard&type=Date)](https://star-history.com/#yourusername/collaborative-whiteboard&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Jerry-Khobby/collaborative-whiteboard&type=Date)](https://star-history.com/#Jerry-Khobby/collaborative-whiteboard&Date)
 
 ## 💖 Support
 

@@ -19,6 +19,7 @@ A real-time collaborative drawing application that allows multiple users to draw
 - ⚡ **Optimized Performance**: 60 FPS drawing with throttling
 
 ## 🏗️ Architecture
+
 ```
 ┌─────────────────────┐        WebSocket         ┌─────────────────────┐
 │                     │◄──────────────────────────►│                     │
@@ -38,6 +39,7 @@ A real-time collaborative drawing application that allows multiple users to draw
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **Next.js 14** - React framework with App Router
 - **React 18** - UI library
 - **Socket.IO Client** - WebSocket client
@@ -46,6 +48,7 @@ A real-time collaborative drawing application that allows multiple users to draw
 - **HTML5 Canvas** - Drawing surface
 
 ### Backend
+
 - **NestJS** - Progressive Node.js framework
 - **Socket.IO** - Real-time bidirectional communication
 - **MongoDB** - NoSQL database
@@ -55,6 +58,7 @@ A real-time collaborative drawing application that allows multiple users to draw
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 ```bash
 Node.js v18+
 MongoDB (local or Atlas)
@@ -64,12 +68,14 @@ npm or yarn
 ### Installation
 
 **1. Clone the repository**
+
 ```bash
 git clone <repository-url>
 cd collaborative-whiteboard
 ```
 
 **2. Setup Backend**
+
 ```bash
 cd whiteboard-backend
 npm install
@@ -88,6 +94,7 @@ npm run start:dev
 ```
 
 **3. Setup Frontend**
+
 ```bash
 cd ../whiteboard-frontend
 npm install
@@ -103,6 +110,7 @@ npm run dev
 ```
 
 **4. Open Application**
+
 ```
 http://localhost:3000 (or assigned port)
 ```
@@ -110,6 +118,7 @@ http://localhost:3000 (or assigned port)
 ## 📖 User Guide
 
 ### Creating a Canvas
+
 1. Navigate to home page
 2. Click **"Create New Canvas"**
 3. Unique Canvas ID is generated
@@ -117,12 +126,14 @@ http://localhost:3000 (or assigned port)
 5. Start drawing together!
 
 ### Joining a Canvas
+
 1. Get Canvas ID from a friend
 2. Enter it in **"Join Existing Canvas"** field
 3. Click **"Join Canvas"**
 4. Start collaborating in real-time!
 
 ### Drawing Features
+
 - **Draw**: Click and drag mouse/finger
 - **Change Color**: Use color picker
 - **Adjust Size**: Move brush size slider (1-20px)
@@ -132,6 +143,7 @@ http://localhost:3000 (or assigned port)
 ## 🔌 API Documentation
 
 ### REST API Endpoints
+
 ```http
 POST   /canvas           # Create new canvas
 GET    /canvas/:id       # Get canvas by ID
@@ -141,12 +153,14 @@ GET    /canvas           # Get all canvases
 ### WebSocket Events
 
 **Client → Server**
+
 - `join-canvas` - Join a canvas room
 - `draw` - Send drawing data
 - `clear` - Clear the canvas
 - `leave-canvas` - Leave canvas room
 
 **Server → Client**
+
 - `joined-canvas` - Join confirmation
 - `drawing-data` - Receive drawings
 - `canvas-cleared` - Canvas cleared notification
@@ -154,10 +168,12 @@ GET    /canvas           # Get all canvases
 - `user-left` - User left notification
 
 See detailed documentation:
+
 - [Backend API](./whiteboard-backend/README.md)
 - [Frontend Docs](./whiteboard-frontend/README.md)
 
 ## 📊 Data Flow
+
 ```
 User Draws on Canvas
         ↓
@@ -177,6 +193,7 @@ Other Users' Canvases Update
 ```
 
 ## 🗂️ Project Structure
+
 ```
 collaborative-whiteboard/
 ├── whiteboard-backend/          # NestJS backend
@@ -203,6 +220,7 @@ collaborative-whiteboard/
 ## 🧪 Testing
 
 ### Backend Tests
+
 ```bash
 cd whiteboard-backend
 npm test                # Unit tests
@@ -211,6 +229,7 @@ npm run test:cov       # Coverage report
 ```
 
 ### Frontend Tests
+
 ```bash
 cd whiteboard-frontend
 npm test               # Jest tests
@@ -223,6 +242,7 @@ npm run type-check     # TypeScript check
 ### Backend Deployment
 
 **Render**
+
 ```bash
 1. Connect GitHub repository
 2. Set build command: npm install && npm run build
@@ -231,6 +251,7 @@ npm run type-check     # TypeScript check
 ```
 
 **Railway**
+
 ```bash
 railway login
 railway init
@@ -238,6 +259,7 @@ railway up
 ```
 
 **Heroku**
+
 ```bash
 heroku create your-backend-name
 heroku addons:create mongolab
@@ -247,18 +269,21 @@ git push heroku main
 ### Frontend Deployment
 
 **Vercel (Recommended)**
+
 ```bash
 vercel login
 vercel --prod
 ```
 
 **Netlify**
+
 ```bash
 npm run build
 # Upload .next folder via Netlify dashboard
 ```
 
 **AWS Amplify**
+
 ```bash
 amplify init
 amplify add hosting
@@ -294,18 +319,21 @@ amplify publish
 ## 🛣️ Roadmap
 
 ### Phase 1 (Current)
+
 - [x] Real-time drawing
 - [x] User presence
 - [x] Canvas persistence
 - [x] Color & brush customization
 
 ### Phase 2 (In Progress)
+
 - [ ] User authentication (NextAuth.js)
 - [ ] Private canvases
 - [ ] Undo/Redo functionality
 - [ ] Eraser tool
 
 ### Phase 3 (Planned)
+
 - [ ] Shape tools (rectangle, circle, line)
 - [ ] Text tool
 - [ ] Export to PNG/PDF
@@ -313,6 +341,7 @@ amplify publish
 - [ ] Templates
 
 ### Phase 4 (Future)
+
 - [ ] Mobile app (React Native)
 - [ ] Video chat integration
 - [ ] AI-powered drawing suggestions
@@ -324,20 +353,27 @@ We welcome contributions! Please follow these steps:
 
 1. **Fork** the repository
 2. **Create** your feature branch
+
 ```bash
    git checkout -b feature/AmazingFeature
 ```
+
 3. **Commit** your changes
+
 ```bash
    git commit -m 'Add some AmazingFeature'
 ```
+
 4. **Push** to the branch
+
 ```bash
    git push origin feature/AmazingFeature
 ```
+
 5. **Open** a Pull Request
 
 ### Contribution Guidelines
+
 - Write meaningful commit messages
 - Add tests for new features
 - Update documentation
@@ -359,7 +395,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📧 Contact
 
 - **Portfolio**: [yourwebsite.com](https://jeremiah-anku-koblah.vercel.app/)
-- **Email**: jeremiah.anku.coblah@gmail.com
+- **Email**: <jeremiah.anku.coblah@gmail.com>
 - **GitHub**: [@yourusername](https://github.com/Jerry-Khobby)
 - **LinkedIn**: [Jeremiah Anku Coblah](https://www.linkedin.com/in/jeremiah-coblah-anku-2b3732229/)
 - **Twitter**: [@yourhandle](https://x.com/jerry92023784)
@@ -373,6 +409,7 @@ If you find this project useful, please consider giving it a star! ⭐
 ## 💖 Support
 
 If you like this project, please:
+
 - ⭐ Star the repository
 - 🐛 Report bugs
 - 💡 Suggest new features
@@ -390,6 +427,7 @@ If you like this project, please:
 **Problem**: Frontend can't connect to backend WebSocket
 
 **Symptoms**:
+
 - Console error: "WebSocket connection failed"
 - No real-time updates
 - Users can't see each other's drawings
@@ -397,6 +435,7 @@ If you like this project, please:
 **Solutions**:
 
 **Check Backend URL**
+
 ```typescript
 // In whiteboard-frontend/.env.local
 NEXT_PUBLIC_WS_URL=http://localhost:3000  # ✅ Correct
@@ -404,6 +443,7 @@ NEXT_PUBLIC_WS_URL=http://localhost:3000  # ✅ Correct
 ```
 
 **Verify CORS Settings**
+
 ```typescript
 // In whiteboard-backend/src/app.gateway.ts
 @WebSocketGateway({
@@ -416,6 +456,7 @@ NEXT_PUBLIC_WS_URL=http://localhost:3000  # ✅ Correct
 ```
 
 **Check Backend is Running**
+
 ```bash
 # Should see: WebSocket Gateway initialized
 cd whiteboard-backend
@@ -423,6 +464,7 @@ npm run start:dev
 ```
 
 **Test Connection**
+
 ```javascript
 // In browser console on frontend
 const socket = io('http://localhost:3000');
@@ -437,6 +479,7 @@ socket.on('connect_error', (err) => console.error('Error:', err));
 **Problem**: Backend can't connect to MongoDB
 
 **Symptoms**:
+
 - Backend crashes on startup
 - Error: "MongooseServerSelectionError"
 - Canvas data not saving
@@ -444,6 +487,7 @@ socket.on('connect_error', (err) => console.error('Error:', err));
 **Solutions**:
 
 **Check MongoDB is Running**
+
 ```bash
 # Check if MongoDB is running
 ps aux | grep mongod
@@ -456,6 +500,7 @@ sudo systemctl start mongod
 ```
 
 **Verify Connection String**
+
 ```bash
 # In whiteboard-backend/.env
 MONGODB_URI=mongodb://localhost:27017/whiteboard
@@ -465,6 +510,7 @@ MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/whiteboard?retry
 ```
 
 **Test Connection**
+
 ```bash
 # Using MongoDB Compass
 # Or mongo shell:
@@ -472,6 +518,7 @@ mongo mongodb://localhost:27017/whiteboard
 ```
 
 **Common MongoDB Atlas Issues**:
+
 - ❌ IP address not whitelisted → Add 0.0.0.0/0 (allow all) for testing
 - ❌ Wrong username/password → Check credentials
 - ❌ Wrong database name → Verify in Atlas dashboard
@@ -483,6 +530,7 @@ mongo mongodb://localhost:27017/whiteboard
 **Problem**: Canvas element appears but doesn't draw
 
 **Symptoms**:
+
 - White/blank canvas
 - Mouse events not working
 - No lines appear when drawing
@@ -490,6 +538,7 @@ mongo mongodb://localhost:27017/whiteboard
 **Solutions**:
 
 **Check Canvas Dimensions**
+
 ```tsx
 // Canvas must have explicit width/height
 <canvas
@@ -504,6 +553,7 @@ mongo mongodb://localhost:27017/whiteboard
 ```
 
 **Verify Context Initialization**
+
 ```typescript
 const canvas = canvasRef.current;
 const ctx = canvas?.getContext('2d');
@@ -519,6 +569,7 @@ ctx.fillRect(0, 0, 100, 100); // Should see red rectangle
 ```
 
 **Check Mouse Event Handlers**
+
 ```tsx
 <canvas
   onMouseDown={handleMouseDown}  // ✅
@@ -535,6 +586,7 @@ ctx.fillRect(0, 0, 100, 100); // Should see red rectangle
 **Problem**: User A draws but User B doesn't see it
 
 **Symptoms**:
+
 - Local drawing works
 - Other users don't see drawings
 - Console shows no errors
@@ -542,6 +594,7 @@ ctx.fillRect(0, 0, 100, 100); // Should see red rectangle
 **Solutions**:
 
 **Verify Both Users Joined Same Canvas**
+
 ```typescript
 // Check URL matches
 // User A: http://localhost:3000/canvas/abc123
@@ -552,6 +605,7 @@ ctx.fillRect(0, 0, 100, 100); // Should see red rectangle
 ```
 
 **Check Socket Room Join**
+
 ```typescript
 // Backend should log:
 // "User socketId joined canvas: abc123"
@@ -566,6 +620,7 @@ socket.on('joined-canvas', (data) => {
 ```
 
 **Verify Broadcasting Logic**
+
 ```typescript
 // In backend gateway - should use client.to() not client.emit()
 @SubscribeMessage('draw')
@@ -581,6 +636,7 @@ handleDraw(client: Socket, data: any) {
 ```
 
 **Check Frontend is Listening**
+
 ```typescript
 // Must subscribe to drawing-data event
 useEffect(() => {
@@ -602,6 +658,7 @@ useEffect(() => {
 **Problem**: Drawing is slow or choppy
 
 **Symptoms**:
+
 - Lines appear delayed
 - Cursor and line don't match
 - Browser feels sluggish
@@ -609,6 +666,7 @@ useEffect(() => {
 **Solutions**:
 
 **Implement Throttling**
+
 ```typescript
 let lastEmitTime = 0;
 const THROTTLE_MS = 16; // 60 FPS
@@ -630,6 +688,7 @@ function handleMouseMove(e: MouseEvent) {
 ```
 
 **Optimize Canvas Rendering**
+
 ```typescript
 // Use requestAnimationFrame for smooth rendering
 function drawStroke(stroke) {
@@ -647,6 +706,7 @@ function drawStroke(stroke) {
 ```
 
 **Reduce Point Collection**
+
 ```typescript
 // Only collect every Nth point
 let pointCounter = 0;
@@ -662,6 +722,7 @@ function handleMouseMove(e: MouseEvent) {
 ```
 
 **Check Network Latency**
+
 ```typescript
 // Measure round-trip time
 const startTime = Date.now();
@@ -684,6 +745,7 @@ socket.on('pong', () => {
 **Problem**: Drawings disappear after refresh
 
 **Symptoms**:
+
 - Canvas is blank after page reload
 - Late joiners don't see existing drawings
 - Data not in MongoDB
@@ -691,6 +753,7 @@ socket.on('pong', () => {
 **Solutions**:
 
 **Check Canvas Exists in Database**
+
 ```bash
 # Connect to MongoDB
 mongo whiteboard
@@ -703,6 +766,7 @@ db.canvases.find({ canvasId: "abc123" }, { drawingData: 1 })
 ```
 
 **Verify Save Logic**
+
 ```typescript
 // Backend should have save endpoint or periodic save
 async saveDrawingData(canvasId: string, drawingData: any[]) {
@@ -722,6 +786,7 @@ async saveDrawingData(canvasId: string, drawingData: any[]) {
 ```
 
 **Implement Frontend Save**
+
 ```typescript
 // Auto-save every 5 seconds
 useEffect(() => {
@@ -740,6 +805,7 @@ useEffect(() => {
 ```
 
 **Load Data on Join**
+
 ```typescript
 // When joining canvas, fetch existing data
 socket.on('joined-canvas', async (data) => {
@@ -764,6 +830,7 @@ socket.on('joined-canvas', async (data) => {
 **Common Build Errors**:
 
 **Error: Module not found: Can't resolve 'socket.io-client'**
+
 ```bash
 # Solution: Install in correct directory
 cd whiteboard-frontend
@@ -771,6 +838,7 @@ npm install socket.io-client
 ```
 
 **Error: window is not defined**
+
 ```typescript
 // Solution: Use dynamic import with ssr: false
 import dynamic from 'next/dynamic';
@@ -781,6 +849,7 @@ const Canvas = dynamic(() => import('@/components/Canvas'), {
 ```
 
 **Error: Canvas API not available**
+
 ```typescript
 // Solution: Check if running in browser
 useEffect(() => {
@@ -802,6 +871,7 @@ useEffect(() => {
 **Solutions**:
 
 **Socket.IO Types**
+
 ```typescript
 // Install types
 npm install --save-dev @types/socket.io-client
@@ -823,6 +893,7 @@ const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(url);
 ```
 
 **Canvas Ref Types**
+
 ```typescript
 import { useRef } from 'react';
 
@@ -842,6 +913,7 @@ if (!ctx) return;
 **Problem**: Cross-Origin Request Blocked
 
 **Symptoms**:
+
 - Browser console: "CORS policy blocked"
 - Fetch/API requests failing
 - WebSocket can't connect
@@ -849,6 +921,7 @@ if (!ctx) return;
 **Solutions**:
 
 **Backend CORS for HTTP**
+
 ```typescript
 // In main.ts
 async function bootstrap() {
@@ -864,6 +937,7 @@ async function bootstrap() {
 ```
 
 **Backend CORS for WebSocket**
+
 ```typescript
 // In app.gateway.ts
 @WebSocketGateway({
@@ -875,6 +949,7 @@ async function bootstrap() {
 ```
 
 **Production CORS**
+
 ```typescript
 // Use environment variables
 @WebSocketGateway({
@@ -894,6 +969,7 @@ async function bootstrap() {
 **Solutions**:
 
 **Add Touch Event Handlers**
+
 ```tsx
 <canvas
   ref={canvasRef}
@@ -909,6 +985,7 @@ async function bootstrap() {
 ```
 
 **Handle Touch Events**
+
 ```typescript
 function handleStart(e: React.MouseEvent | React.TouchEvent) {
   e.preventDefault(); // Prevent scrolling
@@ -938,6 +1015,7 @@ function getPosition(e: React.MouseEvent | React.TouchEvent) {
 ```
 
 **Prevent Default Touch Behavior**
+
 ```css
 /* Prevent touch actions on canvas */
 canvas {
@@ -954,6 +1032,7 @@ canvas {
 ### Backend Debugging
 
 **Enable Verbose Logging**
+
 ```typescript
 // In app.gateway.ts
 @SubscribeMessage('draw')
@@ -967,6 +1046,7 @@ handleDraw(client: Socket, data: any) {
 ```
 
 **Monitor WebSocket Connections**
+
 ```typescript
 afterInit(server: Server) {
   this.logger.log('WebSocket Gateway initialized');
@@ -980,6 +1060,7 @@ afterInit(server: Server) {
 ### Frontend Debugging
 
 **Socket.IO Debug Mode**
+
 ```typescript
 import { io } from 'socket.io-client';
 
@@ -993,6 +1074,7 @@ localStorage.debug = 'socket.io-client:*'; // Only Socket.IO logs
 ```
 
 **Canvas State Inspector**
+
 ```typescript
 // Add to window for debugging
 if (typeof window !== 'undefined') {
@@ -1019,6 +1101,7 @@ if (typeof window !== 'undefined') {
 ### Performance Monitoring
 
 **Track Drawing Performance**
+
 ```typescript
 let drawCount = 0;
 let lastReportTime = Date.now();
@@ -1042,6 +1125,7 @@ function handleDraw() {
 ```
 
 **Monitor WebSocket Latency**
+
 ```typescript
 function measureLatency() {
   const start = Date.now();
@@ -1068,6 +1152,7 @@ setInterval(measureLatency, 60000);
 ### Input Validation
 
 **Validate Canvas ID**
+
 ```typescript
 // Backend validation
 @SubscribeMessage('join-canvas')
@@ -1092,6 +1177,7 @@ async handleJoinCanvas(client: Socket, data: any) {
 ```
 
 **Sanitize Drawing Data**
+
 ```typescript
 // Validate stroke data
 function validateStroke(stroke: any): boolean {
@@ -1116,6 +1202,7 @@ function validateStroke(stroke: any): boolean {
 ### Rate Limiting
 
 **Limit Drawing Events**
+
 ```typescript
 // Backend rate limiting
 private drawRateLimits = new Map<string, number[]>();
@@ -1150,6 +1237,7 @@ This comprehensive troubleshooting guide should help you debug and resolve most 
 ---
 
 Would you like me to create any additional documentation such as:
+
 - API integration examples
 - Advanced features implementation guide
 - Performance optimization guide

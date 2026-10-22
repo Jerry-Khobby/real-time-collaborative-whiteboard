@@ -1,4 +1,4 @@
-# 🎨 Collaborative Whiteboard
+#  Collaborative Whiteboard
 
 A real-time collaborative drawing application that allows multiple users to draw on the same canvas simultaneously. Built with Next.js, NestJS, Socket.IO, and MongoDB.
 
@@ -7,18 +7,18 @@ A real-time collaborative drawing application that allows multiple users to draw
 ![NestJS](https://img.shields.io/badge/NestJS-10-red)
 ![MongoDB](https://img.shields.io/badge/MongoDB-7-green)
 
-## ✨ Features
+##  Features
 
-- 🎨 **Real-time Collaboration**: Multiple users can draw simultaneously
-- 💾 **Persistent Storage**: All drawings saved to MongoDB
-- 🖌️ **Customizable Brushes**: Adjustable colors and sizes
-- 👥 **User Presence**: See who's online in real-time
-- 🧹 **Clear Canvas**: Remove all drawings with one click
-- 🌐 **WebSocket Communication**: Ultra-fast real-time updates
-- 📱 **Responsive Design**: Works on desktop, tablet, and mobile
-- ⚡ **Optimized Performance**: 60 FPS drawing with throttling
+-  **Real-time Collaboration**: Multiple users can draw simultaneously
+-  **Persistent Storage**: All drawings saved to MongoDB
+-  **Customizable Brushes**: Adjustable colors and sizes
+-  **User Presence**: See who's online in real-time
+-  **Clear Canvas**: Remove all drawings with one click
+-  **WebSocket Communication**: Ultra-fast real-time updates
+-  **Responsive Design**: Works on desktop, tablet, and mobile
+-  **Optimized Performance**: 60 FPS drawing with throttling
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 ┌─────────────────────┐        WebSocket         ┌─────────────────────┐
@@ -36,7 +36,7 @@ A real-time collaborative drawing application that allows multiple users to draw
                                                    └────────────────────┘
 ```
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 
@@ -55,7 +55,7 @@ A real-time collaborative drawing application that allows multiple users to draw
 - **Mongoose** - MongoDB ODM
 - **TypeScript** - Type-safe JavaScript
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 
@@ -115,7 +115,7 @@ npm run dev
 http://localhost:3000 (or assigned port)
 ```
 
-## 📖 User Guide
+##  User Guide
 
 ### Creating a Canvas
 
@@ -172,7 +172,7 @@ See detailed documentation:
 - [Backend API](./whiteboard-backend/README.md)
 - [Frontend Docs](./whiteboard-frontend/README.md)
 
-## 📊 Data Flow
+##  Data Flow
 
 ```
 User Draws on Canvas
@@ -192,7 +192,7 @@ Other Users' Canvases Update
 [Backend saves to MongoDB periodically]
 ```
 
-## 🗂️ Project Structure
+##  Project Structure
 
 ```
 collaborative-whiteboard/
@@ -217,7 +217,7 @@ collaborative-whiteboard/
 └── README.md                    # This file
 ```
 
-## 🧪 Testing
+##  Testing
 
 ### Backend Tests
 
@@ -237,7 +237,7 @@ npm run test:e2e       # Playwright tests
 npm run type-check     # TypeScript check
 ```
 
-## 🚀 Deployment
+##  Deployment
 
 ### Backend Deployment
 
@@ -290,7 +290,7 @@ amplify add hosting
 amplify publish
 ```
 
-## 📈 Performance Metrics
+##  Performance Metrics
 
 | Metric | Value |
 |--------|-------|
@@ -300,23 +300,23 @@ amplify publish
 | Average Load Time | < 2s |
 | Lighthouse Score | 95+ |
 
-## 🔒 Security
+##  Security
 
-- ✅ CORS configured for specific origins
-- ✅ Input validation on all endpoints
-- ✅ MongoDB injection prevention
-- ✅ Rate limiting on WebSocket events
-- ✅ Environment variables for secrets
-- ✅ TypeScript for type safety
+-  CORS configured for specific origins
+-  Input validation on all endpoints
+-  MongoDB injection prevention
+-  Rate limiting on WebSocket events
+-  Environment variables for secrets
+-  TypeScript for type safety
 
-## 🐛 Known Issues
+##  Known Issues
 
 - Touch drawing on some Android devices may have reduced accuracy
 - Very large canvases (1000+ strokes) may experience slowdown
 - Canvas clear affects all users instantly (no undo)
 - Safari may have slight WebSocket connection delays
 
-## 🛣️ Roadmap
+##  Roadmap
 
 ### Phase 1 (Current)
 
@@ -347,7 +347,7 @@ amplify publish
 - [ ] AI-powered drawing suggestions
 - [ ] Version history
 
-## 🤝 Contributing
+##  Contributing
 
 We welcome contributions! Please follow these steps:
 
@@ -380,11 +380,11 @@ We welcome contributions! Please follow these steps:
 - Follow existing code style
 - Ensure all tests pass
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👏 Acknowledgments
+##  Acknowledgments
 
 - **Socket.IO** team for excellent real-time library
 - **Vercel** for Next.js framework and hosting
@@ -392,7 +392,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **MongoDB** for flexible database solution
 - **Open Source Community** for inspiration
 
-## 📧 Contact
+##  Contact
 
 - **Portfolio**: [yourwebsite.com](https://jeremiah-anku-koblah.vercel.app/)
 - **Email**: <jeremiah.anku.coblah@gmail.com>
@@ -400,21 +400,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **LinkedIn**: [Jeremiah Anku Coblah](https://www.linkedin.com/in/jeremiah-coblah-anku-2b3732229/)
 - **Twitter**: [@yourhandle](https://x.com/jerry92023784)
 
-## 🌟 Star History
+##  Star History
 
-If you find this project useful, please consider giving it a star! ⭐
+If you find this project useful, please consider giving it a star! 
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Jerry-Khobby/collaborative-whiteboard&type=Date)](https://star-history.com/#Jerry-Khobby/collaborative-whiteboard&Date)
 
-## 💖 Support
+##  Support
 
 If you like this project, please:
 
-- ⭐ Star the repository
-- 🐛 Report bugs
-- 💡 Suggest new features
-- 🔀 Submit pull requests
-- 📢 Share with others
+-  Star the repository
+-  Report bugs
+-  Suggest new features
+-  Submit pull requests
+-  Share with others
 
 ---
 
@@ -1147,7 +1147,7 @@ setInterval(measureLatency, 60000);
 
 ---
 
-## 🛡️ Security Best Practices
+##  Security Best Practices
 
 ### Input Validation
 
